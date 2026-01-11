@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Portaria - Condomínio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: Arial;
+  background: #f2f2f2;
+  text-align: center;
+}
+.card {
+  background: white;
+  margin: 10px;
+  padding: 15px;
+  border-radius: 10px;
+}
+button {
+  margin: 5px;
+  padding: 15px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+}
+.tel { background: #007bff; }
+.zap { background: #25D366; }
+</style>
+</head>
+<body>
+
+<h2>Selecione a casa</h2>
+<div id="casas"></div>
+
+<script>
+fetch("https://script.google.com/macros/s/AKfycbzpBvYNt2yaHq-GMdgqDOB0mA7gJ0bBFRXywWsap3dUjbFuW2zbv3mPwxyaBWeDq0qQZA/exec")
+  .then(r => r.json())
+  .then(data => {
+    const div = document.getElementById("casas");
+
+    data.forEach(m => {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      card.innerHTML = `<h3>Casa ${m.casa}</h3>`;
+
+      if (m.preferencia === "Telefone" || m.preferencia === "Ambos") {
+        const btTel = document.createElement("button");
+        btTel.className = "tel";
+        btTel.innerText = "📞 Ligar";
+        btTel.onclick = () => {
+          location.href = "tel:+" + m.telefone;
+        };
+        card.appendChild(btTel);
+      }
+
+      if (m.preferencia === "WhatsApp" || m.preferencia === "Ambos") {
+        const btZap = document.createElement("button");
+        btZap.className = "zap";
+        btZap.innerText = "💬 WhatsApp";
+        btZap.onclick = () => {
+          location.href = "https://wa.me/" + m.whatsapp +
+            "?text=Entregador%20na%20portaria";
+        };
+        card.appendChild(btZap);
+      }
+
+      div.appendChild(card);
+    });
+  });
+</script>
+
+</body>
+</html>
