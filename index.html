@@ -48,7 +48,7 @@ fetch("https://script.google.com/macros/s/AKfycbzpBvYNt2yaHq-GMdgqDOB0mA7gJ0bBFR
       if (m.preferencia === "Telefone" || m.preferencia === "Ambos") {
         const btTel = document.createElement("button");
         btTel.className = "tel";
-        btTel.innerText = "📞 Ligar";
+        btTel.innerText = "Ligar";
         btTel.onclick = () => {
           location.href = "tel:+" + m.telefone;
         };
@@ -58,7 +58,7 @@ fetch("https://script.google.com/macros/s/AKfycbzpBvYNt2yaHq-GMdgqDOB0mA7gJ0bBFR
       if (m.preferencia === "WhatsApp" || m.preferencia === "Ambos") {
         const btZap = document.createElement("button");
         btZap.className = "zap";
-        btZap.innerText = "💬 WhatsApp";
+        btZap.innerText = "WhatsApp";
         btZap.onclick = () => {
           location.href = "https://wa.me/" + m.whatsapp +
             "?text=Entregador%20na%20portaria";
@@ -73,3 +73,4 @@ fetch("https://script.google.com/macros/s/AKfycbzpBvYNt2yaHq-GMdgqDOB0mA7gJ0bBFR
 
 </body>
 </html>
+
