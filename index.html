@@ -39,39 +39,55 @@ button {
 fetch("https://script.google.com/macros/s/AKfycbxVS3WNlWH0PcwtQZCRsTFv4RkM94OarEZ138YmDfbUbpK4n6RKyWIm_MTDnZ1KN4No0Q/exec")
   .then(r => r.json())
   .then(data => {
-    const div = document.getElementById("casas");
+
+    const row = document.getElementById("casas");
 
     data.forEach(m => {
+
+      const col = document.createElement("div");
+      col.className = "col-6 mb-3";
+
       const card = document.createElement("div");
       card.className = "card";
 
-      card.innerHTML = `<h3>Casa ${m.casa}</h3>`;
+      card.innerHTML = `<h5>Casa ${m.casa}</h5>`;
 
-      if (m.preferencia === "Telefone" || m.preferencia === "Ambos") {
-        const btTel = document.createElement("button");
-        btTel.className = "tel";
-        btTel.innerText = "Ligar";
-        btTel.onclick = () => {
-          location.href = "tel:+" + m.telefone;
-        };
-        card.appendChild(btTel);
+      const botoes = document.createElement("div");
+      botoes.className = "botoes";
+
+      // TELEFONE
+      const btTel = document.createElement("button");
+      btTel.className = "btn-acao tel";
+      btTel.innerHTML = `<i class="bi bi-telephone-fill"></i>`;
+
+      if (m.telefone) {
+        btTel.onclick = () => location.href = "tel:+" + m.telefone;
+      } else {
+        btTel.classList.add("desativado");
       }
 
-      if (m.preferencia === "WhatsApp" || m.preferencia === "Ambos") {
-        const btZap = document.createElement("button");
-        btZap.className = "zap";
-        btZap.innerText = "WhatsApp";
-        btZap.onclick = () => {
-          location.href = "https://wa.me/" + m.whatsapp +
-            "?text=Entregador%20na%20portaria";
-        };
-        card.appendChild(btZap);
+      // WHATSAPP
+      const btZap = document.createElement("button");
+      btZap.className = "btn-acao zap";
+      btZap.innerHTML = `<i class="bi bi-whatsapp"></i>`;
+
+      if (m.whatsapp) {
+        btZap.onclick = () =>
+          location.href = `https://wa.me/${m.whatsapp}?text=Entregador%20na%20portaria`;
+      } else {
+        btZap.classList.add("desativado");
       }
 
-      div.appendChild(card);
+      botoes.appendChild(btTel);
+      botoes.appendChild(btZap);
+
+      card.appendChild(botoes);
+      col.appendChild(card);
+      row.appendChild(col);
     });
   });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>
+
