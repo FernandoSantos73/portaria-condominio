@@ -16,13 +16,16 @@ body {
 }
 
 .container {
+  max-width: 1200px;   /* centraliza conteúdo */
+  margin: 0 auto;
   padding-left: 6px;
   padding-right: 6px;
 }
 
 .row {
-  --bs-gutter-x: 4px;
-  --bs-gutter-y: 0px;
+  --bs-gutter-x: 4px;   /* espaçamento horizontal entre cards */
+  --bs-gutter-y: 4px;   /* espaçamento vertical entre cards */
+  justify-content: center; /* centraliza os cards horizontalmente */
 }
 
 .card {
@@ -35,11 +38,11 @@ body {
 
 .botoes {
   display: flex;
-  margin-top: 6px;
+  margin-top: 6px;   /* distância entre card e botões */
 }
 
 .botoes button {
-  width: 50%;
+  width: 50%;        /* cada botão ocupa metade do card */
   border-radius: 0;
   font-size: 24px;
   padding: 10px 0;
@@ -95,7 +98,7 @@ fetch("https://script.google.com/macros/s/AKfycbxVS3WNlWH0PcwtQZCRsTFv4RkM94OarE
     data.forEach(m => {
 
       const col = document.createElement("div");
-      col.className = "col-6 mb-3";
+      col.className = "col-6 col-md-4 col-lg-3 mb-2";
 
       const card = document.createElement("div");
       card.className = "card";
@@ -140,6 +143,7 @@ fetch("https://script.google.com/macros/s/AKfycbxVS3WNlWH0PcwtQZCRsTFv4RkM94OarE
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>
+
 
 
 
